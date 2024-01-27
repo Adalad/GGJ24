@@ -24,6 +24,8 @@ public class FightManager : Singleton<FightManager>
     private int m_TeamBPlayer;
     private int m_TeamBOption;
 
+    public GameObject[] lightPointReference;
+
     void Start()
     {
         FightUIManager.Instance.ClearPlayerPanels();
@@ -152,10 +154,10 @@ public class FightManager : Singleton<FightManager>
     {
         FightUIManager.Instance.GameReady();
         GeneratePublicChoices();
-        int firstTeam = Random.Range(0, 1);
-        m_TeamAPlayer = Random.Range(0, 1);
+        int firstTeam = Random.Range(0, 2);
+        m_TeamAPlayer = Random.Range(0, 2);
         m_TeamAOption = -1;
-        m_TeamBPlayer = Random.Range(0, 1);
+        m_TeamBPlayer = Random.Range(0, 2);
         m_TeamBOption = -1;
         int[] playerOptions = new int[4];
         int maxOptions = 0;
@@ -285,8 +287,8 @@ public class FightManager : Singleton<FightManager>
         m_Round++;
         if (m_Round == 3)
         {
-            // TODO fight round finished
             PlayerTypes.TeamScores = m_Scores;
+            SceneChangeManager.Instance.ChangeSceneTo("EndScene");
             return;
         }
 
@@ -327,5 +329,7 @@ public class FightManager : Singleton<FightManager>
         {
             m_Scores[1]++;
         }
+
+        StartRound();
     }
 }

@@ -94,7 +94,6 @@ public class GameManager : Singleton<GameManager>
             yield return null;
         }
 
-        // TODO count results and change phase
         for (int i = 0; i < DropZoneTeamA.InsidePickables.Count; i++)
         {
            PlayerTypes.TeamAChoices[DropZoneTeamA.InsidePickables[i].gameObject.GetComponent<Pickable>().Mood]++; 
@@ -118,7 +117,6 @@ public class GameManager : Singleton<GameManager>
             waitTime = Random.Range(BoxSpawnMinTime, BoxSpawnMaxTime);
             yield return new WaitForSeconds(waitTime);
 
-            // TODO Spawn prefab
             Vector3 newPos = new Vector3(Random.Range(BoxSpawnArea.xMin, BoxSpawnArea.xMax), BoxSpawnHeight, Random.Range(BoxSpawnArea.yMin, BoxSpawnArea.yMax));
             GameObject.Instantiate(BoxSpawnPrefab, newPos, Random.rotation);
         }
