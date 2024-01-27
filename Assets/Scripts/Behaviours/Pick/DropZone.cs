@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DropZone : MonoBehaviour
 {
-    private List<GameObject> InsidePickables;
+    public List<GameObject> InsidePickables;
 
     private void Start()
     {

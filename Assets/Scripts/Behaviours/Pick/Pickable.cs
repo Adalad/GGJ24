@@ -8,6 +8,8 @@ public class Pickable : MonoBehaviour
 
     private void Start()
     {
-        gameObject.GetComponent<Renderer>().material = BoxMoodMaterials[Random.Range(0, 6)];
+        int randomNumberMood = Random.Range(0, 6); 
+        gameObject.GetComponent<Renderer>().material = BoxMoodMaterials[randomNumberMood];
+        Mood= randomNumberMood;
     }
 }
