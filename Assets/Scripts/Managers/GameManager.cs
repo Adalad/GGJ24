@@ -74,13 +74,7 @@ public class GameManager : Singleton<GameManager>
     private IEnumerator StartCoolDownRoutine()
     {
         TogglePauseState(null);
-        float acumTime = 0f;
-        while (acumTime < CoolDownTime)
-        {
-            ChronoText.text = (CoolDownTime - acumTime).ToString();
-            acumTime += Time.unscaledDeltaTime;
-            yield return new WaitForSecondsRealtime(1f);
-        }
+        yield return new WaitForSecondsRealtime(CoolDownTime);
         TogglePauseState(null);
         StartCoroutine(ClockRoutine());
     }

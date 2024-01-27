@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public Transform CarryTransform;
     public float ThrowForce;
+    public float ImpactVelocityThreshold = 10f;
+
     [Header("Sub Behaviours")]
     public PlayerMovementBehaviour playerMovementBehaviour;
     public PlayerAnimationBehaviour playerAnimationBehaviour;
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (m_PickedObject != null)
             {
-                ThrowPickUp();
+                ThrowPickUp(false);
             }
         }
     }
@@ -180,7 +182,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    private void ThrowPickUp()
+    private void ThrowPickUp(bool drop)
     {
         if (m_PickedObject == null)
         {
@@ -190,7 +192,18 @@ public class PlayerController : MonoBehaviour
         m_PickedObject.transform.parent = null;
         m_PickedObject.GetComponent<Rigidbody>().isKinematic = false;
         m_PickedObject.GetComponent<Collider>().enabled = true;
-        m_PickedObject.GetComponent<Rigidbody>().AddForce(ThrowForce * transform.forward);
+        if (!drop)
+        {
+            m_PickedObject.GetComponent<Rigidbody>().AddForce(ThrowForce * transform.forward);
+        }
         m_PickedObject = null;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if ((collision.gameObject.CompareTag("Pickable")) && (m_PickedObject != null) && (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > ImpactVelocityThreshold))
+        {
+            ThrowPickUp(true);
+        }
     }
 }
