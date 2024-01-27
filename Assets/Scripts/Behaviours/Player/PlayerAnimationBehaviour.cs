@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAnimationBehaviour : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class PlayerAnimationBehaviour : MonoBehaviour
     //Animation String IDs
     private int playerMovementAnimationID;
     private int playerAttackAnimationID;
+    private int playerHitAnimationID;
 
     public void SetupBehaviour()
     {
@@ -20,11 +19,12 @@ public class PlayerAnimationBehaviour : MonoBehaviour
     {
         playerMovementAnimationID = Animator.StringToHash("Movement");
         playerAttackAnimationID = Animator.StringToHash("Attack");
+        playerHitAnimationID = Animator.StringToHash("Hit");
     }
 
     public void UpdateMovementAnimation(float movementBlendValue)
     {
-        playerAnimator.SetFloat(playerMovementAnimationID, movementBlendValue);
+        playerAnimator.SetFloat("Movement", movementBlendValue);
     }
 
     public void PlayAttackAnimation()
@@ -32,5 +32,8 @@ public class PlayerAnimationBehaviour : MonoBehaviour
         playerAnimator.SetTrigger(playerAttackAnimationID);
     }
 
-
+    public void PlayHitAnimation()
+    {
+        playerAnimator.SetTrigger(playerHitAnimationID);
+    }
 }

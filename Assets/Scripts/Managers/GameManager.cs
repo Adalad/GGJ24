@@ -52,7 +52,7 @@ public class GameManager : Singleton<GameManager>
                 Vector3 spawnPosition = CalculatePositionForTeam(i, j, 2);
                 Quaternion spawnRotation = CalculateRotation();
 
-                GameObject spawnedPlayer = Instantiate(playerPrefab, spawnPosition, spawnRotation) as GameObject;
+                GameObject spawnedPlayer = GameObject.Instantiate(playerPrefab, spawnPosition, spawnRotation);
                 AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerController>());
             }
         }
