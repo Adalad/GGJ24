@@ -67,6 +67,7 @@ public class CharacterSelector : Singleton<CharacterSelector>
             CharacterReadyBox[playerID].gameObject.SetActive(true);
             PlayerTypes.playerAsignedCharacter[playerID] = m_SelectedCharacters[playerID];
             speed = 0;
+            PlayersReady(); 
         }
         else
         {
@@ -98,6 +99,11 @@ public class CharacterSelector : Singleton<CharacterSelector>
 
     void PlayersReady()
     {
-
+        if (CharacterReadyBox[0].gameObject.activeSelf /*&& CharacterReadyBox[1].gameObject.activeSelf && CharacterReadyBox[2].gameObject.activeSelf && CharacterReadyBox[3].gameObject.activeSelf*/)
+        {
+            SceneChangeManager.Instance.ChangeSceneTo("PickScene"); 
+        }
     }
+
+
 }
