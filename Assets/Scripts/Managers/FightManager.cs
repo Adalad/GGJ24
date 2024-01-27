@@ -17,6 +17,8 @@ public class FightManager : Singleton<FightManager>
     private FightPlayerController m_FocusedPlayerController;
 
     private int m_Round;
+    private int[] m_Scores;
+    private int[] m_PublicChoices;
     private int m_TeamAPlayer;
     private int m_TeamAOption;
     private int m_TeamBPlayer;
@@ -25,7 +27,10 @@ public class FightManager : Singleton<FightManager>
     void Start()
     {
         FightUIManager.Instance.ClearPlayerPanels();
+        FightUIManager.Instance.ClearPublicPanel();
         m_IsPaused = false;
+        m_Scores = new int[2];
+        m_PublicChoices = new int[3];
 
         SetupLocalMultiplayer();
     }
@@ -146,6 +151,7 @@ public class FightManager : Singleton<FightManager>
     private void StartRound()
     {
         FightUIManager.Instance.GameReady();
+        GeneratePublicChoices();
         int firstTeam = Random.Range(0, 1);
         m_TeamAPlayer = Random.Range(0, 1);
         m_TeamAOption = -1;
@@ -247,8 +253,79 @@ public class FightManager : Singleton<FightManager>
         }
     }
 
+    private void GeneratePublicChoices()
+    {
+        bool retry;
+        for (int i = 0; i < 3; ++i)
+        {
+            int nextTry = -1;
+            do
+            {
+                retry = false;
+                nextTry = Random.Range(0, 6);
+                for (int j = 0; j < 3; ++j)
+                {
+                    if (m_PublicChoices[j] == nextTry)
+                    {
+                        retry = true;
+                    }
+                }
+            }
+            while (retry);
+
+            m_PublicChoices[i] = nextTry;
+        }
+
+        FightUIManager.Instance.SetPublicPanel(m_PublicChoices);
+    }
+
     private void EndRound()
     {
+        FightUIManager.Instance.ClearPublicPanel();
         m_Round++;
+        if (m_Round == 3)
+        {
+            // TODO fight round finished
+            PlayerTypes.TeamScores = m_Scores;
+            return;
+        }
+
+        int currentA = 0;
+        int currentB = 0;
+        // TEAM A Score
+        if (m_PublicChoices[0] == m_TeamAOption)
+        {
+            currentA = 2;
+        }
+        else if (m_PublicChoices[1] == m_TeamAOption)
+        {
+            currentA = 1;
+        }
+        else if (m_PublicChoices[2] == m_TeamAOption)
+        {
+            currentA = 0;
+        }
+        // TEAM B Score
+        if (m_PublicChoices[0] == m_TeamBOption)
+        {
+            currentB = 2;
+        }
+        else if (m_PublicChoices[1] == m_TeamBOption)
+        {
+            currentB = 1;
+        }
+        else if (m_PublicChoices[2] == m_TeamBOption)
+        {
+            currentB = 0;
+        }
+
+        if (currentA > currentB)
+        {
+            m_Scores[0]++;
+        }
+        else if (currentA < currentB)
+        {
+            m_Scores[1]++;
+        }
     }
 }

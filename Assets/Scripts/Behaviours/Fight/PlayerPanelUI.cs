@@ -10,7 +10,7 @@ public class PlayerPanelUI : MonoBehaviour
 
     public void SetUpPanel(int playerId, int[] playerMoods)
     {
-        PlayerText.text = "P" + playerId;
+        PlayerText.text = "P" + (playerId + 1);
         for (int i = 0; i < playerMoods.Length; ++i)
         {
             if (playerMoods[i] >= 0)
