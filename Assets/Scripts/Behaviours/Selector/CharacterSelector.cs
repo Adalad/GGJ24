@@ -22,8 +22,11 @@ public class CharacterSelector : Singleton<CharacterSelector>
 
     private int[] m_SelectedCharacters;
 
+    private float[] PlayersSpeeds;
+
     private void Start()
     {
+        PlayersSpeeds = new float[] { 500, 500, 500, 500 };
         m_SelectedCharacters = new int[4];
         for (int i = 0; i < m_SelectedCharacters.Length; ++i)
         {
@@ -51,7 +54,7 @@ public class CharacterSelector : Singleton<CharacterSelector>
 
     public void PlayerCursorMovement(int playerID, Vector2 movement)
     {
-        Vector3 newPos = PlayerCursors[playerID].transform.position + (Vector3)movement * Time.deltaTime * speed;
+        Vector3 newPos = PlayerCursors[playerID].transform.position + (Vector3)movement * Time.deltaTime * PlayersSpeeds[playerID];
         PlayerCursors[playerID].transform.position = newPos;
     }
 
@@ -66,13 +69,13 @@ public class CharacterSelector : Singleton<CharacterSelector>
         {
             CharacterReadyBox[playerID].gameObject.SetActive(true);
             PlayerTypes.playerAsignedCharacter[playerID] = m_SelectedCharacters[playerID];
-            speed = 0;
-            PlayersReady(); 
+            PlayersSpeeds[playerID] = 0;
+            PlayersReady();
         }
         else
         {
             CharacterReadyBox[playerID].gameObject.SetActive(false);
-            speed = 500; 
+            PlayersSpeeds[playerID] = 500;
         }
     }
 
@@ -99,9 +102,9 @@ public class CharacterSelector : Singleton<CharacterSelector>
 
     void PlayersReady()
     {
-        if (CharacterReadyBox[0].gameObject.activeSelf /*&& CharacterReadyBox[1].gameObject.activeSelf && CharacterReadyBox[2].gameObject.activeSelf && CharacterReadyBox[3].gameObject.activeSelf*/)
+        if (CharacterReadyBox[0].gameObject.activeSelf && CharacterReadyBox[1].gameObject.activeSelf && CharacterReadyBox[2].gameObject.activeSelf && CharacterReadyBox[3].gameObject.activeSelf)
         {
-            SceneChangeManager.Instance.ChangeSceneTo("PickScene"); 
+            SceneChangeManager.Instance.ChangeSceneTo("PickScene");
         }
     }
 
