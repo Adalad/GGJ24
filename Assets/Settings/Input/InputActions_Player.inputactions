@@ -216,6 +216,94 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Fight Controls",
+            "id": "0d5af0dc-8f18-4fa3-9e24-4a24dcc0c799",
+            "actions": [
+                {
+                    "name": "Option1",
+                    "type": "Button",
+                    "id": "1c585916-9b5e-4f58-857c-ad20e58fda4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Option2",
+                    "type": "Button",
+                    "id": "67bc7c12-5fe5-417d-b9c9-8e0b6e5a95ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Option3",
+                    "type": "Button",
+                    "id": "1e7d594d-a140-47fd-8067-268198390fc7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Option4",
+                    "type": "Button",
+                    "id": "4e888c90-68f8-4bd7-8e0a-68e5648f8e92",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e3e5a8ec-602c-4377-a940-62802707119e",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Option1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69a35269-360b-4702-831a-2f9e5e41cbc0",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Option2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "26896535-f47c-4c41-a90c-ab19c32c3720",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Option3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f3c03ce-d9b3-42e2-b5f1-5dc03f9b17c3",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Option4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
