@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 public class CharacterSelector : Singleton<CharacterSelector>
 {
@@ -104,8 +105,14 @@ public class CharacterSelector : Singleton<CharacterSelector>
     {
         if (CharacterReadyBox[0].gameObject.activeSelf && CharacterReadyBox[1].gameObject.activeSelf && CharacterReadyBox[2].gameObject.activeSelf && CharacterReadyBox[3].gameObject.activeSelf)
         {
-            SceneChangeManager.Instance.ChangeSceneTo("PickScene");
+            StartCoroutine(TimerBeforeChange());
         }
+    }
+
+    IEnumerator TimerBeforeChange()
+    {
+        yield return new WaitForSeconds(1);
+        SceneChangeManager.Instance.ChangeSceneTo("PickScene");
     }
 
 
