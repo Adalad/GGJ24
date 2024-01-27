@@ -27,8 +27,13 @@ public class GameManager : Singleton<GameManager>
     private bool m_IsPaused;
     private PlayerController m_FocusedPlayerController;
 
+    public DropZone DropZoneTeamA;
+    public DropZone DropZoneTeamB;
+
     void Start()
     {
+        DropZoneTeamA = DropZoneTeamA.GetComponent<DropZone>();
+        DropZoneTeamB = DropZoneTeamB.GetComponent<DropZone>();
         m_IsPaused = false;
 
         SetupLocalMultiplayer();
@@ -90,7 +95,19 @@ public class GameManager : Singleton<GameManager>
         }
 
         // TODO count results and change phase
+        for (int i = 0; i < DropZoneTeamA.InsidePickables.Count; i++)
+        {
+           PlayerTypes.TeamAChoices[DropZoneTeamA.InsidePickables[i].gameObject.GetComponent<Pickable>().Mood]++; 
+        }
+
+        for (int i = 0; i < DropZoneTeamB.InsidePickables.Count; i++)
+        {
+            PlayerTypes.TeamAChoices[DropZoneTeamB.InsidePickables[i].gameObject.GetComponent<Pickable>().Mood]++;
+        }
+
         StopAllCoroutines();
+
+        SceneChangeManager.Instance.ChangeSceneTo("FightScene"); 
     }
 
     private IEnumerator SpawnBoxes()
