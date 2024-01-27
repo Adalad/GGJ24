@@ -100,19 +100,7 @@ MonoBehaviour:
         m_CallState: 2
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnMovement
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 548e32fd-77d1-40e5-8197-32ca56b41bc0
     m_ActionName: Player Controls/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualShock4GamepadHID/leftStick,/XInputControllerWindows/leftStick]
   - m_PersistentCalls:
@@ -120,35 +108,11 @@ MonoBehaviour:
     m_ActionId: 8ebbde1f-3044-41bc-bdac-430e0eae1a68
     m_ActionName: Player Controls/Look[/Mouse/delta,/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnAttack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 10fecf58-9483-40e0-ae20-15c8d01a4288
     m_ActionName: Player Controls/Attack[/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth,/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnTogglePause
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: a70a208e-b491-4921-b460-a0144030ef2a
     m_ActionName: Player Controls/TogglePause[/Keyboard/p,/DualShock4GamepadHID/start,/XInputControllerWindows/start]
   - m_PersistentCalls:
@@ -187,9 +151,73 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 96c8be88-a7bb-4861-b5e9-956b4208d043
     m_ActionName: Menu Controls/Left Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9134094338790574827}
+        m_TargetAssemblyTypeName: FightPlayerController, Assembly-CSharp
+        m_MethodName: OnOption1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1c585916-9b5e-4f58-857c-ad20e58fda4c
+    m_ActionName: Fight Controls/Option1
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9134094338790574827}
+        m_TargetAssemblyTypeName: FightPlayerController, Assembly-CSharp
+        m_MethodName: OnOption2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 67bc7c12-5fe5-417d-b9c9-8e0b6e5a95ce
+    m_ActionName: Fight Controls/Option2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9134094338790574827}
+        m_TargetAssemblyTypeName: FightPlayerController, Assembly-CSharp
+        m_MethodName: OnOption3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1e7d594d-a140-47fd-8067-268198390fc7
+    m_ActionName: Fight Controls/Option3
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9134094338790574827}
+        m_TargetAssemblyTypeName: FightPlayerController, Assembly-CSharp
+        m_MethodName: OnOption4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4e888c90-68f8-4bd7-8e0a-68e5648f8e92
+    m_ActionName: Fight Controls/Option4
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player Controls
+  m_DefaultActionMap: Fight Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!136 &1743518200311987067

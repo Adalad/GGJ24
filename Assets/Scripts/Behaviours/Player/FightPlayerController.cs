@@ -26,12 +26,38 @@ public class FightPlayerController : MonoBehaviour
         playerAnimationBehaviour.SetupBehaviour();
     }
 
-    //This is called from PlayerInput, when a button has been pushed, that corresponds with the 'Attack' action
-    public void OnAttack(InputAction.CallbackContext value)
+    public void OnOption1(InputAction.CallbackContext value)
     {
+        if(value.performed)
+        {
+            FightManager.Instance.ReceivePlayerOption(m_PlayerID, 0);
+        }
     }
 
-    //This is called from Player Input, when a button has been pushed, that correspons with the 'TogglePause' action
+    public void OnOption2(InputAction.CallbackContext value)
+    {
+        if (value.performed)
+        {
+            FightManager.Instance.ReceivePlayerOption(m_PlayerID, 1);
+        }
+    }
+
+    public void OnOption3(InputAction.CallbackContext value)
+    {
+        if (value.performed)
+        {
+            FightManager.Instance.ReceivePlayerOption(m_PlayerID, 2);
+        }
+    }
+
+    public void OnOption4(InputAction.CallbackContext value)
+    {
+        if (value.performed)
+        {
+            FightManager.Instance.ReceivePlayerOption(m_PlayerID, 3);
+        }
+    }
+
     public void OnTogglePause(InputAction.CallbackContext value)
     {
         if (value.started)

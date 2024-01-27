@@ -17,6 +17,10 @@ public class FightManager : Singleton<FightManager>
     private FightPlayerController m_FocusedPlayerController;
 
     private int m_Round;
+    private int m_TeamAPlayer;
+    private int m_TeamAOption;
+    private int m_TeamBPlayer;
+    private int m_TeamBOption;
 
     void Start()
     {
@@ -61,6 +65,8 @@ public class FightManager : Singleton<FightManager>
         TogglePauseState(null);
         yield return new WaitForSecondsRealtime(CoolDownTime);
         TogglePauseState(null);
+        FightUIManager.Instance.GameReady();
+        StartRound();
     }
 
     public void TogglePauseState(FightPlayerController newFocusedPlayerController)
@@ -141,8 +147,104 @@ public class FightManager : Singleton<FightManager>
     {
         FightUIManager.Instance.GameReady();
         int firstTeam = Random.Range(0, 1);
-        int teamAPlayer = Random.Range(0, 1);
-        int teamBPlayer = Random.Range(0, 1);
+        m_TeamAPlayer = Random.Range(0, 1);
+        m_TeamAOption = -1;
+        m_TeamBPlayer = Random.Range(0, 1);
+        m_TeamBOption = -1;
+        int[] playerOptions = new int[4];
+        int maxOptions = 0;
+        for (int i = 0; i < PlayerTypes.TeamAChoices.Length; ++i)
+        {
+            if (PlayerTypes.TeamAChoices[i] != 0)
+            {
+                maxOptions++;
+            }
+        }
+        playerOptions[0] = PlayerTypes.playerAsignedCharacter[m_TeamAPlayer];
+        if (maxOptions == 0)
+        {
+            maxOptions = 1;
+            playerOptions[1] = Random.Range(0, 6);
+        }
+        else
+        {
+            maxOptions = maxOptions > 3 ? 3 : maxOptions;
+            for (int i = 1; i < maxOptions + 1; ++i)
+            {
+                while (true)
+                {
+                    int nextTry = Random.Range(0, PlayerTypes.TeamAChoices.Length);
+                    if (PlayerTypes.TeamAChoices[nextTry] != 0)
+                    {
+                        playerOptions[i] = nextTry;
+                        break;
+                    }
+                }
+            }
+        }
+        for (int i = maxOptions + 1; i < playerOptions.Length; ++i)
+        {
+            playerOptions[i] = -1;
+        }
+
+        FightUIManager.Instance.SetPlayerPanel(m_TeamAPlayer, playerOptions);
+
+        playerOptions = new int[4];
+        maxOptions = 0;
+        for (int i = 0; i < PlayerTypes.TeamAChoices.Length; ++i)
+        {
+            if (PlayerTypes.TeamAChoices[i] != 0)
+            {
+                maxOptions++;
+            }
+        }
+        playerOptions[0] = PlayerTypes.playerAsignedCharacter[m_TeamBPlayer];
+        if (maxOptions == 0)
+        {
+            maxOptions = 1;
+            playerOptions[1] = Random.Range(0, 6);
+        }
+        else
+        {
+            maxOptions = maxOptions > 3 ? 3 : maxOptions;
+            for (int i = 1; i < maxOptions + 1; ++i)
+            {
+                while (true)
+                {
+                    int nextTry = Random.Range(0, PlayerTypes.TeamBChoices.Length);
+                    if (PlayerTypes.TeamBChoices[nextTry] != 0)
+                    {
+                        playerOptions[i] = nextTry;
+                        break;
+                    }
+                }
+            }
+        }
+        for (int i = maxOptions + 1; i < playerOptions.Length; ++i)
+        {
+            playerOptions[i] = -1;
+        }
+
+        FightUIManager.Instance.SetPlayerPanel(2 + m_TeamBPlayer, playerOptions);
+    }
+
+    public void ReceivePlayerOption(int playerId, int option)
+    {
+        if ((m_TeamAPlayer == playerId) && (m_TeamAOption == -1))
+        {
+            m_TeamAOption = option;
+            FightUIManager.Instance.ClearPlayerPanel(playerId);
+        }
+        else if ((m_TeamBPlayer + 2 == playerId) && (m_TeamBOption == -1))
+        {
+            m_TeamBOption = option;
+            FightUIManager.Instance.ClearPlayerPanel(playerId);
+        }
+
+        if ((m_TeamAOption != -1) && (m_TeamBOption != -1))
+        {
+            EndRound();
+        }
     }
 
     private void EndRound()

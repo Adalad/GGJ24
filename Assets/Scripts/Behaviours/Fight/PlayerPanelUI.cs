@@ -13,12 +13,17 @@ public class PlayerPanelUI : MonoBehaviour
         PlayerText.text = "P" + playerId;
         for (int i = 0; i < playerMoods.Length; ++i)
         {
-            PlayerOptions[i].sprite = MoodSprites[i];
-            PlayerOptions[i].gameObject.SetActive(true);
+            if (playerMoods[i] >= 0)
+            {
+                PlayerOptions[i].sprite = MoodSprites[playerMoods[i]];
+                PlayerOptions[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                PlayerOptions[i].gameObject.SetActive(false);
+            }
         }
-        for (int i = playerMoods.Length; i < PlayerOptions.Length; ++i)
-        {
-            PlayerOptions[i].gameObject.SetActive(false);
-        }
+
+        gameObject.SetActive(true);
     }
 }
