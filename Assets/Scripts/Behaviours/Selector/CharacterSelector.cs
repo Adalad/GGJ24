@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class CharacterSelector : Singleton<CharacterSelector>
 {
     public Sprite readySprite;
+    public float speed;
 
     [Header("Controla las 4 cajas de jugadores")]
     //Controla la caja de selección de personaje de cada uno de los jugadores
@@ -12,18 +13,26 @@ public class CharacterSelector : Singleton<CharacterSelector>
     public Image[] CharacterSelectBoxCharacterSprites;
     public Image[] CharacterReadyBox;
     public Image[] CharacterJoinBox;
+    public RectTransform[] PlayerCursors;
 
     [Header("Controla los elementos de los 6 personajes")]
     //Controla QUE elementos pone en las cajas anteriores
     public string[] CharacterSelectFinalText;
     public Sprite[] CharacterSelectFinalCharacterSprites;
 
+    private int[] m_SelectedCharacters;
+
     private void Start()
     {
+        m_SelectedCharacters = new int[4];
+        for (int i = 0; i < m_SelectedCharacters.Length; ++i)
+        {
+            m_SelectedCharacters[i] = -1;
+        }
+
         for (int i = 0; i < CharacterReadyBox.Length; i++)
         {
             CharacterReadyBox[i].gameObject.SetActive(false);
-            Debug.Log("Desactivo");
         }
     }
 
@@ -31,7 +40,7 @@ public class CharacterSelector : Singleton<CharacterSelector>
     {
         for (int i = 0; i < number; i++)
         {
-            CharacterJoinBox[i].gameObject.SetActive(false); 
+            CharacterJoinBox[i].gameObject.SetActive(false);
         }
 
         for (int i = number; i < 4; i++)
@@ -40,34 +49,54 @@ public class CharacterSelector : Singleton<CharacterSelector>
         }
     }
 
-    //Cuando el jugador en cuestión tiene su puntero encima del botón del personaje. Cambia el texto y el sprite de personaje
-    public void PlayerOverCharacter(int characterSelected)
+    public void PlayerCursorMovement(int playerID, Vector2 movement)
     {
-        if (CharacterReadyBox[0].gameObject.active == false)
-        {
-            //Añadir un int playerLoquesea y sustituirlo en el los siguientes arrays que pone 0 para hacer que cada jugador cambie su caja
-            CharacterSelectBoxText[0].text = CharacterSelectFinalText[characterSelected];
-            CharacterSelectBoxCharacterSprites[0].sprite = CharacterSelectFinalCharacterSprites[characterSelected];
-        }
-
+        Vector3 newPos = PlayerCursors[playerID].transform.position + (Vector3)movement * Time.deltaTime * speed;
+        PlayerCursors[playerID].transform.position = newPos;
     }
 
-    //Cuando el jugador pulsa el botón
-    public void PlayerReadyCharacter(int characterSelected)
+    public void PlayerSubmit(int playerID)
     {
-        if (CharacterReadyBox[0].gameObject.active == false)
+        if (m_SelectedCharacters[playerID] == -1)
         {
-            CharacterReadyBox[0].gameObject.SetActive(true);
-            PlayerTypes.playerAsignedCharacter[0] = characterSelected;
+            return;
         }
 
+        if (!CharacterReadyBox[playerID].gameObject.activeSelf)
+        {
+            CharacterReadyBox[playerID].gameObject.SetActive(true);
+            PlayerTypes.playerAsignedCharacter[playerID] = m_SelectedCharacters[playerID];
+            speed = 0;
+        }
         else
         {
-            CharacterReadyBox[0].gameObject.SetActive(false);
+            CharacterReadyBox[playerID].gameObject.SetActive(false);
+            speed = 500; 
         }
     }
 
-    public void PlayersReady()
+    //Cuando el jugador en cuestión tiene su puntero encima del botón del personaje. Cambia el texto y el sprite de personaje
+    public void PlayerOverCharacter(int playerID, int characterSelected)
+    {
+        if (!CharacterReadyBox[playerID].gameObject.activeSelf)
+        {
+            if (characterSelected == -1)
+            {
+                CharacterSelectBoxText[playerID].text = CharacterSelectFinalText[CharacterSelectFinalText.Length - 1];
+                CharacterSelectBoxCharacterSprites[playerID].sprite = CharacterSelectFinalCharacterSprites[CharacterSelectFinalText.Length - 1];
+            }
+            else
+            {
+                CharacterSelectBoxText[playerID].text = CharacterSelectFinalText[characterSelected];
+                CharacterSelectBoxCharacterSprites[playerID].sprite = CharacterSelectFinalCharacterSprites[characterSelected];
+            }
+
+            //Añadir un int playerLoquesea y sustituirlo en el los siguientes arrays que pone 0 para hacer que cada jugador cambie su caja
+            m_SelectedCharacters[playerID] = characterSelected;
+        }
+    }
+
+    void PlayersReady()
     {
 
     }

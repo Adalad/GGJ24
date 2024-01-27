@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5062027600983921537}
   - component: {fileID: 3984910858365239293}
+  - component: {fileID: 5381233349352785752}
   m_Layer: 0
   m_Name: UIPlayer
   m_TagString: MainCamera
@@ -75,7 +76,19 @@ MonoBehaviour:
     m_ActionId: a70a208e-b491-4921-b460-a0144030ef2a
     m_ActionName: Player Controls/TogglePause[/Keyboard/p]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5381233349352785752}
+        m_TargetAssemblyTypeName: PlayerSelectUI, Assembly-CSharp
+        m_MethodName: OnNavigate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 538ffe95-ba92-4acb-84f7-314f6ac8e0a5
     m_ActionName: Menu Controls/Navigate[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -87,7 +100,19 @@ MonoBehaviour:
     m_ActionId: d54e5ff5-4f35-4d2f-a745-95d14aef8c43
     m_ActionName: Menu Controls/Point[/Mouse/position]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5381233349352785752}
+        m_TargetAssemblyTypeName: PlayerSelectUI, Assembly-CSharp
+        m_MethodName: OnSubmit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 5f571f6a-e9e7-4120-ae3c-79f846bdd202
     m_ActionName: Menu Controls/Submit[/Keyboard/enter]
   - m_PersistentCalls:
@@ -100,6 +125,18 @@ MonoBehaviour:
     m_ActionName: Menu Controls/TogglePause[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player Controls
+  m_DefaultActionMap: Menu Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5381233349352785752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5062027600983921548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e48e63dcfb10074b8730724aa00afdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
