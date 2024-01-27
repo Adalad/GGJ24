@@ -102,7 +102,7 @@ public class GameManager : Singleton<GameManager>
 
         for (int i = 0; i < DropZoneTeamB.InsidePickables.Count; i++)
         {
-            PlayerTypes.TeamAChoices[DropZoneTeamB.InsidePickables[i].gameObject.GetComponent<Pickable>().Mood]++;
+            PlayerTypes.TeamBChoices[DropZoneTeamB.InsidePickables[i].gameObject.GetComponent<Pickable>().Mood]++;
         }
 
         StopAllCoroutines();
