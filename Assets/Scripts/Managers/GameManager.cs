@@ -72,8 +72,8 @@ public class GameManager : Singleton<GameManager>
     {
         for (int i = 0; i < m_ActivePlayerControllers.Count; i++)
         {
-            // TODO player type
-            m_ActivePlayerControllers[i].SetupPlayer(i, 0);
+            // Player type
+            m_ActivePlayerControllers[i].SetupPlayer(i, PlayerTypes.playerAsignedCharacter[i]);
         }
     }
 

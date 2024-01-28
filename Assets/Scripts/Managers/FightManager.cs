@@ -63,8 +63,8 @@ public class FightManager : Singleton<FightManager>
     {
         for (int i = 0; i < m_ActivePlayerControllers.Count; i++)
         {
-            // TODO player types
-            m_ActivePlayerControllers[i].SetupPlayer(i, 0);
+            // Player types
+            m_ActivePlayerControllers[i].SetupPlayer(i, PlayerTypes.playerAsignedCharacter[i]);
         }
     }
 
