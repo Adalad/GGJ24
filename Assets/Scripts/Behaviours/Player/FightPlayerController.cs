@@ -6,10 +6,11 @@ public class FightPlayerController : MonoBehaviour
 {
 
     [Header("Sub Behaviours")]
-    public PlayerAnimationBehaviour playerAnimationBehaviour;
+    public PlayerAnimationBehaviour PlayerAnimationBehaviour;
+    public PlayerVisualBehaviour PlayerVisualBehaviour;
 
     [Header("Input Settings")]
-    public PlayerInput playerInput;
+    public PlayerInput PlayerInput;
 
     private string m_ActionMapPlayerControls = "Player Controls";
     private string m_ActionMapMenuControls = "Menu Controls";
@@ -19,16 +20,17 @@ public class FightPlayerController : MonoBehaviour
     private bool m_MovementDisabled;
 
     //This is called from the GameManager; when the game is being setup.
-    public void SetupPlayer(int newPlayerID)
+    public void SetupPlayer(int newPlayerID, int playerType)
     {
         m_PlayerID = newPlayerID;
 
-        playerAnimationBehaviour.SetupBehaviour();
+        PlayerAnimationBehaviour.SetupBehaviour();
+        PlayerVisualBehaviour.SetupBehaviour(playerType);
     }
 
     public void OnOption1(InputAction.CallbackContext value)
     {
-        if(value.performed)
+        if (value.performed)
         {
             FightManager.Instance.ReceivePlayerOption(m_PlayerID, 0);
         }
@@ -88,29 +90,29 @@ public class FightPlayerController : MonoBehaviour
         switch (gameIsPaused)
         {
             case true:
-                playerInput.DeactivateInput();
+                PlayerInput.DeactivateInput();
                 break;
 
             case false:
-                playerInput.ActivateInput();
+                PlayerInput.ActivateInput();
                 break;
         }
     }
 
     void RemoveAllBindingOverrides()
     {
-        InputActionRebindingExtensions.RemoveAllBindingOverrides(playerInput.currentActionMap);
+        InputActionRebindingExtensions.RemoveAllBindingOverrides(PlayerInput.currentActionMap);
     }
 
     //Switching Action Maps ----
     public void EnableGameplayControls()
     {
-        playerInput.SwitchCurrentActionMap(m_ActionMapPlayerControls);
+        PlayerInput.SwitchCurrentActionMap(m_ActionMapPlayerControls);
     }
 
     public void EnablePauseMenuControls()
     {
-        playerInput.SwitchCurrentActionMap(m_ActionMapMenuControls);
+        PlayerInput.SwitchCurrentActionMap(m_ActionMapMenuControls);
     }
 
     //Get Data ----
@@ -121,11 +123,23 @@ public class FightPlayerController : MonoBehaviour
 
     public InputActionAsset GetActionAsset()
     {
-        return playerInput.actions;
+        return PlayerInput.actions;
     }
 
     public PlayerInput GetPlayerInput()
     {
-        return playerInput;
+        return PlayerInput;
+    }
+
+    public void RoundReaction(bool win)
+    {
+        if (win)
+        {
+            PlayerAnimationBehaviour.PlayWinAnimation();
+        }
+        else
+        {
+            PlayerAnimationBehaviour.PlayLoseAnimation();
+        }
     }
 }

@@ -188,6 +188,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 96c8be88-a7bb-4861-b5e9-956b4208d043
     m_ActionName: Menu Controls/Left Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1c585916-9b5e-4f58-857c-ad20e58fda4c
+    m_ActionName: Fight Controls/Option1
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67bc7c12-5fe5-417d-b9c9-8e0b6e5a95ce
+    m_ActionName: Fight Controls/Option2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1e7d594d-a140-47fd-8067-268198390fc7
+    m_ActionName: Fight Controls/Option3
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4e888c90-68f8-4bd7-8e0a-68e5648f8e92
+    m_ActionName: Fight Controls/Option4
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player Controls
@@ -261,6 +277,7 @@ MonoBehaviour:
   StunnedTime: 2
   playerMovementBehaviour: {fileID: 280609174572680928}
   playerAnimationBehaviour: {fileID: 4642636409307682049}
+  PlayerVisualBehaviour: {fileID: 234982566071904263}
   playerInput: {fileID: 1743518200311987064}
   movementSmoothingSpeed: 5
 --- !u!114 &280609174572680928
@@ -385,10 +402,20 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4642636409307682049}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a336e891bc381645af7affdf0e1bbd9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 234982566071904263}
   m_SourcePrefab: {fileID: 100100000, guid: 2a336e891bc381645af7affdf0e1bbd9, type: 3}
 --- !u!95 &1091416179008111998 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 2a336e891bc381645af7affdf0e1bbd9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6795906078772312303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1938553899457388353 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4947424173040281518, guid: 2a336e891bc381645af7affdf0e1bbd9,
     type: 3}
   m_PrefabInstance: {fileID: 6795906078772312303}
   m_PrefabAsset: {fileID: 0}
@@ -411,6 +438,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 1091416179008111998}
+--- !u!114 &234982566071904263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5948834284380423614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae99bc223de8ab74e8e0bf62d9e5d6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerMesh: {fileID: 1938553899457388353}
+  TypeMaterials:
+  - {fileID: 2100000, guid: 65092e4bfb54a93478fff515353d33d6, type: 2}
+  - {fileID: 2100000, guid: d6b52c7a001477545bcd2602643e113d, type: 2}
+  - {fileID: 2100000, guid: 71d830008b7d66f42bcc6ae785370287, type: 2}
+  - {fileID: 2100000, guid: 2625ab5856e00414dbfa316fa4b6e414, type: 2}
+  - {fileID: 2100000, guid: 9867fde528869dc4bbf779c43ff1de77, type: 2}
+  - {fileID: 2100000, guid: f1ce6456e32d3ad41a21795d770d8d16, type: 2}
 --- !u!4 &6468666530863865604 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2a336e891bc381645af7affdf0e1bbd9,

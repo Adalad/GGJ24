@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sub Behaviours")]
     public PlayerMovementBehaviour playerMovementBehaviour;
     public PlayerAnimationBehaviour playerAnimationBehaviour;
+    public PlayerVisualBehaviour PlayerVisualBehaviour;
 
     [Header("Input Settings")]
     public PlayerInput playerInput;
@@ -28,11 +29,12 @@ public class PlayerController : MonoBehaviour
     private bool m_MovementDisabled;
 
     //This is called from the GameManager; when the game is being setup.
-    public void SetupPlayer(int newPlayerID)
+    public void SetupPlayer(int newPlayerID, int playerType)
     {
         m_PlayerID = newPlayerID;
 
         playerAnimationBehaviour.SetupBehaviour();
+        PlayerVisualBehaviour.SetupBehaviour(playerType);
     }
 
 

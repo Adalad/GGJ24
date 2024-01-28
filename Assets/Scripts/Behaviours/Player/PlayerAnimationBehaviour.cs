@@ -36,4 +36,14 @@ public class PlayerAnimationBehaviour : MonoBehaviour
     {
         playerAnimator.SetTrigger(playerHitAnimationID);
     }
+
+    public void PlayWinAnimation()
+    {
+        playerAnimator.SetTrigger("Win");
+    }
+
+    public void PlayLoseAnimation()
+    {
+        playerAnimator.SetTrigger("Lose");
+    }
 }

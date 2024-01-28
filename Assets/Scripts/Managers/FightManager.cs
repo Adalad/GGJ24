@@ -63,7 +63,8 @@ public class FightManager : Singleton<FightManager>
     {
         for (int i = 0; i < m_ActivePlayerControllers.Count; i++)
         {
-            m_ActivePlayerControllers[i].SetupPlayer(i);
+            // Player types
+            m_ActivePlayerControllers[i].SetupPlayer(i, PlayerTypes.playerAsignedCharacter[i]);
         }
     }
 
@@ -324,12 +325,26 @@ public class FightManager : Singleton<FightManager>
         if (currentA > currentB)
         {
             m_Scores[0]++;
+            StartCoroutine(InterRoundRoutine(true));
         }
         else if (currentA < currentB)
         {
             m_Scores[1]++;
+            StartCoroutine(InterRoundRoutine(false));
         }
+    }
 
+    private IEnumerator InterRoundRoutine(bool winsA)
+    {
+        // Players reactions
+        m_ActivePlayerControllers[0].RoundReaction(winsA);
+        m_ActivePlayerControllers[1].RoundReaction(winsA);
+        m_ActivePlayerControllers[2].RoundReaction(!winsA);
+        m_ActivePlayerControllers[3].RoundReaction(!winsA);
+        // TODO Round result lights
+        // Delay
+        yield return new WaitForSeconds(5f);
+        // Next round
         StartRound();
     }
 }
