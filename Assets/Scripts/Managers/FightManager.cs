@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class FightManager : Singleton<FightManager>
 {
@@ -325,22 +326,43 @@ public class FightManager : Singleton<FightManager>
         if (currentA > currentB)
         {
             m_Scores[0]++;
-            StartCoroutine(InterRoundRoutine(true));
+            StartCoroutine(InterRoundRoutine(0));
         }
         else if (currentA < currentB)
         {
             m_Scores[1]++;
-            StartCoroutine(InterRoundRoutine(false));
+            StartCoroutine(InterRoundRoutine(1));
+        }
+        else
+        {
+            StartCoroutine(InterRoundRoutine(2));
         }
     }
 
-    private IEnumerator InterRoundRoutine(bool winsA)
+    private IEnumerator InterRoundRoutine(int result)
     {
         // Players reactions
-        m_ActivePlayerControllers[0].RoundReaction(winsA);
-        m_ActivePlayerControllers[1].RoundReaction(winsA);
-        m_ActivePlayerControllers[2].RoundReaction(!winsA);
-        m_ActivePlayerControllers[3].RoundReaction(!winsA);
+        if (result == 0)
+        {
+            m_ActivePlayerControllers[0].RoundReaction(true);
+            m_ActivePlayerControllers[1].RoundReaction(true);
+            m_ActivePlayerControllers[2].RoundReaction(false);
+            m_ActivePlayerControllers[3].RoundReaction(false);
+        }
+        else if (result == 1)
+        {
+            m_ActivePlayerControllers[0].RoundReaction(false);
+            m_ActivePlayerControllers[1].RoundReaction(false);
+            m_ActivePlayerControllers[2].RoundReaction(true);
+            m_ActivePlayerControllers[3].RoundReaction(true);
+        }
+        if (result == 2)
+        {
+            m_ActivePlayerControllers[0].RoundReaction(false);
+            m_ActivePlayerControllers[1].RoundReaction(false);
+            m_ActivePlayerControllers[2].RoundReaction(false);
+            m_ActivePlayerControllers[3].RoundReaction(false);
+        }
         // TODO Round result lights
         // Delay
         yield return new WaitForSeconds(5f);
