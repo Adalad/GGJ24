@@ -9,6 +9,6 @@ public class PlayerVisualBehaviour : MonoBehaviour
 
     public void SetupBehaviour(int type)
     {
-        // TODO Change material
+        PlayerMesh.material = TypeMaterials[type]; 
     }
 }

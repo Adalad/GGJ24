@@ -277,6 +277,7 @@ MonoBehaviour:
   StunnedTime: 2
   playerMovementBehaviour: {fileID: 280609174572680928}
   playerAnimationBehaviour: {fileID: 4642636409307682049}
+  PlayerVisualBehaviour: {fileID: 234982566071904263}
   playerInput: {fileID: 1743518200311987064}
   movementSmoothingSpeed: 5
 --- !u!114 &280609174572680928
@@ -450,7 +451,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMesh: {fileID: 1938553899457388353}
-  TypeMaterials: {fileID: 0}
+  TypeMaterials:
+  - {fileID: 2100000, guid: 65092e4bfb54a93478fff515353d33d6, type: 2}
+  - {fileID: 2100000, guid: d6b52c7a001477545bcd2602643e113d, type: 2}
+  - {fileID: 2100000, guid: 71d830008b7d66f42bcc6ae785370287, type: 2}
+  - {fileID: 2100000, guid: 2625ab5856e00414dbfa316fa4b6e414, type: 2}
+  - {fileID: 2100000, guid: 9867fde528869dc4bbf779c43ff1de77, type: 2}
+  - {fileID: 2100000, guid: f1ce6456e32d3ad41a21795d770d8d16, type: 2}
 --- !u!4 &6468666530863865604 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2a336e891bc381645af7affdf0e1bbd9,
