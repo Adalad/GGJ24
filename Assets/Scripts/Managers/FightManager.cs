@@ -63,6 +63,7 @@ public class FightManager : Singleton<FightManager>
     {
         for (int i = 0; i < m_ActivePlayerControllers.Count; i++)
         {
+            // TODO player types
             m_ActivePlayerControllers[i].SetupPlayer(i, 0);
         }
     }
@@ -336,7 +337,11 @@ public class FightManager : Singleton<FightManager>
     private IEnumerator InterRoundRoutine(bool winsA)
     {
         // Players reactions
-        //m_ActivePlayerControllers[0].
+        m_ActivePlayerControllers[0].RoundReaction(winsA);
+        m_ActivePlayerControllers[1].RoundReaction(winsA);
+        m_ActivePlayerControllers[2].RoundReaction(!winsA);
+        m_ActivePlayerControllers[3].RoundReaction(!winsA);
+        // TODO Round result lights
         // Delay
         yield return new WaitForSeconds(5f);
         // Next round
