@@ -15,6 +15,11 @@ public class FightUIManager : Singleton<FightUIManager>
         ReadyText.SetActive(false);
     }
 
+    public void GameInterval()
+    {
+        ReadyText.SetActive(true);
+    }
+
     public void SetPlayerPanel(int playerID, int[] options)
     {
         if ((playerID < 0) || (PlayerPanels.Length <= playerID))

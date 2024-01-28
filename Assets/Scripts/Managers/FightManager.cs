@@ -21,8 +21,10 @@ public class FightManager : Singleton<FightManager>
     private int[] m_Scores;
     private int[] m_PublicChoices;
     private int m_TeamAPlayer;
+    private int[] m_TeamAPlayerOptions;
     private int m_TeamAOption;
     private int m_TeamBPlayer;
+    private int[] m_TeamBPlayerOptions;
     private int m_TeamBOption;
 
     public GameObject[] lightPointReference;
@@ -161,7 +163,7 @@ public class FightManager : Singleton<FightManager>
         m_TeamAOption = -1;
         m_TeamBPlayer = Random.Range(0, 2);
         m_TeamBOption = -1;
-        int[] playerOptions = new int[4];
+        m_TeamAPlayerOptions = new int[4];
         int maxOptions = 0;
         for (int i = 0; i < PlayerTypes.TeamAChoices.Length; ++i)
         {
@@ -170,11 +172,11 @@ public class FightManager : Singleton<FightManager>
                 maxOptions++;
             }
         }
-        playerOptions[0] = PlayerTypes.playerAsignedCharacter[m_TeamAPlayer];
+        m_TeamAPlayerOptions[0] = PlayerTypes.playerAsignedCharacter[m_TeamAPlayer];
         if (maxOptions == 0)
         {
             maxOptions = 1;
-            playerOptions[1] = Random.Range(0, 6);
+            m_TeamAPlayerOptions[1] = Random.Range(0, 6);
         }
         else
         {
@@ -186,20 +188,20 @@ public class FightManager : Singleton<FightManager>
                     int nextTry = Random.Range(0, PlayerTypes.TeamAChoices.Length);
                     if (PlayerTypes.TeamAChoices[nextTry] != 0)
                     {
-                        playerOptions[i] = nextTry;
+                        m_TeamAPlayerOptions[i] = nextTry;
                         break;
                     }
                 }
             }
         }
-        for (int i = maxOptions + 1; i < playerOptions.Length; ++i)
+        for (int i = maxOptions + 1; i < m_TeamAPlayerOptions.Length; ++i)
         {
-            playerOptions[i] = -1;
+            m_TeamAPlayerOptions[i] = -1;
         }
 
-        FightUIManager.Instance.SetPlayerPanel(m_TeamAPlayer, playerOptions);
+        FightUIManager.Instance.SetPlayerPanel(m_TeamAPlayer, m_TeamAPlayerOptions);
 
-        playerOptions = new int[4];
+        m_TeamBPlayerOptions = new int[4];
         maxOptions = 0;
         for (int i = 0; i < PlayerTypes.TeamAChoices.Length; ++i)
         {
@@ -208,11 +210,11 @@ public class FightManager : Singleton<FightManager>
                 maxOptions++;
             }
         }
-        playerOptions[0] = PlayerTypes.playerAsignedCharacter[m_TeamBPlayer];
+        m_TeamBPlayerOptions[0] = PlayerTypes.playerAsignedCharacter[m_TeamBPlayer];
         if (maxOptions == 0)
         {
             maxOptions = 1;
-            playerOptions[1] = Random.Range(0, 6);
+            m_TeamBPlayerOptions[1] = Random.Range(0, 6);
         }
         else
         {
@@ -224,30 +226,30 @@ public class FightManager : Singleton<FightManager>
                     int nextTry = Random.Range(0, PlayerTypes.TeamBChoices.Length);
                     if (PlayerTypes.TeamBChoices[nextTry] != 0)
                     {
-                        playerOptions[i] = nextTry;
+                        m_TeamBPlayerOptions[i] = nextTry;
                         break;
                     }
                 }
             }
         }
-        for (int i = maxOptions + 1; i < playerOptions.Length; ++i)
+        for (int i = maxOptions + 1; i < m_TeamBPlayerOptions.Length; ++i)
         {
-            playerOptions[i] = -1;
+            m_TeamBPlayerOptions[i] = -1;
         }
 
-        FightUIManager.Instance.SetPlayerPanel(2 + m_TeamBPlayer, playerOptions);
+        FightUIManager.Instance.SetPlayerPanel(2 + m_TeamBPlayer, m_TeamBPlayerOptions);
     }
 
     public void ReceivePlayerOption(int playerId, int option)
     {
         if ((m_TeamAPlayer == playerId) && (m_TeamAOption == -1))
         {
-            m_TeamAOption = option;
+            m_TeamAOption = m_TeamAPlayerOptions[option];
             FightUIManager.Instance.ClearPlayerPanel(playerId);
         }
         else if ((m_TeamBPlayer + 2 == playerId) && (m_TeamBOption == -1))
         {
-            m_TeamBOption = option;
+            m_TeamBOption = m_TeamBPlayerOptions[option];
             FightUIManager.Instance.ClearPlayerPanel(playerId);
         }
 
@@ -287,12 +289,6 @@ public class FightManager : Singleton<FightManager>
     {
         FightUIManager.Instance.ClearPublicPanel();
         m_Round++;
-        if (m_Round == 3)
-        {
-            PlayerTypes.TeamScores = m_Scores;
-            SceneChangeManager.Instance.ChangeSceneTo("EndScene");
-            return;
-        }
 
         int currentA = 0;
         int currentB = 0;
@@ -341,6 +337,25 @@ public class FightManager : Singleton<FightManager>
 
     private IEnumerator InterRoundRoutine(int result)
     {
+        if (m_Round < 3)
+        {
+            FightUIManager.Instance.GameInterval();
+        }
+
+        yield return StartCoroutine(ReactionsRoutine(result));
+        if (m_Round == 3)
+        {
+            SceneChangeManager.Instance.ChangeSceneTo("EndScene");
+        }
+        else
+        {
+            StartRound();
+        }
+    }
+
+    private IEnumerator ReactionsRoutine(int result)
+    {
+        // TODO Round result lights
         // Players reactions
         if (result == 0)
         {
@@ -363,10 +378,7 @@ public class FightManager : Singleton<FightManager>
             m_ActivePlayerControllers[2].RoundReaction(false);
             m_ActivePlayerControllers[3].RoundReaction(false);
         }
-        // TODO Round result lights
         // Delay
         yield return new WaitForSeconds(5f);
-        // Next round
-        StartRound();
     }
 }
