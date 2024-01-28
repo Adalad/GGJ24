@@ -72,7 +72,7 @@ public class GameManager : Singleton<GameManager>
     {
         for (int i = 0; i < m_ActivePlayerControllers.Count; i++)
         {
-            m_ActivePlayerControllers[i].SetupPlayer(i);
+            m_ActivePlayerControllers[i].SetupPlayer(i, 0);
         }
     }
 
@@ -96,7 +96,7 @@ public class GameManager : Singleton<GameManager>
 
         for (int i = 0; i < DropZoneTeamA.InsidePickables.Count; i++)
         {
-           PlayerTypes.TeamAChoices[DropZoneTeamA.InsidePickables[i].gameObject.GetComponent<Pickable>().Mood]++; 
+            PlayerTypes.TeamAChoices[DropZoneTeamA.InsidePickables[i].gameObject.GetComponent<Pickable>().Mood]++;
         }
 
         for (int i = 0; i < DropZoneTeamB.InsidePickables.Count; i++)
@@ -106,7 +106,7 @@ public class GameManager : Singleton<GameManager>
 
         StopAllCoroutines();
 
-        SceneChangeManager.Instance.ChangeSceneTo("FightScene"); 
+        SceneChangeManager.Instance.ChangeSceneTo("FightScene");
     }
 
     private IEnumerator SpawnBoxes()
