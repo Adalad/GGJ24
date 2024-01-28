@@ -1,7 +1,6 @@
 using System.Collections;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class SceneChangeManager : Singleton<SceneChangeManager>
 {
