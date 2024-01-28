@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
 
 public class FightManager : Singleton<FightManager>
 {
@@ -11,6 +10,9 @@ public class FightManager : Singleton<FightManager>
     public float CoolDownTime = 1f;
 
     public Transform[] Spawns;
+
+    public Renderer[] LightObjects;
+    public Material[] LightMaterials;
 
     //Spawned Players
     private List<FightPlayerController> m_ActivePlayerControllers;
@@ -26,8 +28,6 @@ public class FightManager : Singleton<FightManager>
     private int m_TeamBPlayer;
     private int[] m_TeamBPlayerOptions;
     private int m_TeamBOption;
-
-    public GameObject[] lightPointReference;
 
     void Start()
     {
@@ -355,7 +355,12 @@ public class FightManager : Singleton<FightManager>
 
     private IEnumerator ReactionsRoutine(int result)
     {
-        // TODO Round result lights
+        // Round result lights
+        if (result < 2)
+        {
+            LightObjects[m_Round - 1].material = LightMaterials[result];
+        }
+        // TODO Meeter
         // Players reactions
         if (result == 0)
         {

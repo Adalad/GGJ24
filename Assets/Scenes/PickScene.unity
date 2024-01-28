@@ -4450,7 +4450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1743518200311987069, guid: c3117c6068fea3a449c0bc4abd6c0ab2,
     type: 3}
-  CoolDownTime: 5
+  CoolDownTime: 2
   RoundTime: 60
   Spawns:
   - {fileID: 1568669756}
