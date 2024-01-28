@@ -12,6 +12,7 @@ public class CharacterSelector : Singleton<CharacterSelector>
     //Controla la caja de selección de personaje de cada uno de los jugadores
     public TMP_Text[] CharacterSelectBoxText;
     public Image[] CharacterSelectBoxCharacterSprites;
+    public Image[] CharacterSelectBoxCharacterColor;
     public Image[] CharacterReadyBox;
     public Image[] CharacterJoinBox;
     public RectTransform[] PlayerCursors;
@@ -20,6 +21,7 @@ public class CharacterSelector : Singleton<CharacterSelector>
     //Controla QUE elementos pone en las cajas anteriores
     public string[] CharacterSelectFinalText;
     public Sprite[] CharacterSelectFinalCharacterSprites;
+    public Sprite[] CharacterSelectFinalCharColor; 
 
     private int[] m_SelectedCharacters;
 
@@ -89,11 +91,13 @@ public class CharacterSelector : Singleton<CharacterSelector>
             {
                 CharacterSelectBoxText[playerID].text = CharacterSelectFinalText[CharacterSelectFinalText.Length - 1];
                 CharacterSelectBoxCharacterSprites[playerID].sprite = CharacterSelectFinalCharacterSprites[CharacterSelectFinalText.Length - 1];
+                CharacterSelectBoxCharacterColor[playerID].sprite = CharacterSelectFinalCharColor[CharacterSelectFinalCharColor.Length - 1];
             }
             else
             {
                 CharacterSelectBoxText[playerID].text = CharacterSelectFinalText[characterSelected];
                 CharacterSelectBoxCharacterSprites[playerID].sprite = CharacterSelectFinalCharacterSprites[characterSelected];
+                CharacterSelectBoxCharacterColor[playerID].sprite = CharacterSelectFinalCharColor[characterSelected];
             }
 
             //Añadir un int playerLoquesea y sustituirlo en el los siguientes arrays que pone 0 para hacer que cada jugador cambie su caja
