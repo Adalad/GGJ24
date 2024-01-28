@@ -272,8 +272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CarryTransform: {fileID: 8729389330025241442}
-  ThrowForce: 1000
-  ImpactVelocityThreshold: 10
+  ThrowForce: 600
+  ImpactVelocityThreshold: 4
   StunnedTime: 2
   playerMovementBehaviour: {fileID: 280609174572680928}
   playerAnimationBehaviour: {fileID: 4642636409307682049}
